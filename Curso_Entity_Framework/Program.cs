@@ -1,12 +1,12 @@
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Curso_Entity_Framework;
+using Microsoft.AspNetCore.Http;
 
 
-            var builder = WebApplication.CreateBuilder(args);
-
-            var app = builder.Build();
+        var builder = WebApplication.CreateBuilder(args);
+        builder.Services.AddDbContext<TareasContext>(p => p.UseInMemoryDatabase("TareasDB"));
+        var app = builder.Build();
         app.MapGet("/", () => "Hello World");
 
             app.MapGet("/dbconexion", async ([FromServices] TareasContext dbContext) =>
