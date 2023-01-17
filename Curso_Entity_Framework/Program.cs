@@ -1,34 +1,18 @@
-namespace Curso_Entity_Framework
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Curso_Entity_Framework;
+
+
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddRazorPages();
-
             var app = builder.Build();
+        app.MapGet("/", () => "Hello World");
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.MapRazorPages();
+            app.MapGet("/dbconexion", async ([FromServices] TareasContext dbContext) =>
+                {
+                    dbContext.Database.EnsureCreated();
+                    return Results.Ok("Base de datos en memoria" + dbContext.Database.IsInMemory());
+                });
 
             app.Run();
-        }
-    }
-}
