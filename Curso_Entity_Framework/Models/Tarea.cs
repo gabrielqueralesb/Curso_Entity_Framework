@@ -10,6 +10,8 @@ namespace Curso_Entity_Framework.Models
         [ForeignKey("CategoriaId")]
         [MaxLength(200)]
         public Guid CategoriaId { get; set;}
+        [Required]
+        [MaxLength(200)]
         public string Titulo { get; set;}
         public string Descripcion { get; set;}
 
