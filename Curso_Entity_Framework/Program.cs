@@ -2,10 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Curso_Entity_Framework;
 
-        var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddDbContext<TareasContext>(p => p.UseInMemoryDatabase("TareasDB"));
 //builder.Services.AddSqlServer<TareasContext>("Data Source=NB0288\\SQLEXPRESS;Initial Catalog= TareasDb;Trusted_Connection=True; Integrated Security=True"); //"Data Source= NB0288\\SQLEXPRESS;Initial Catalog=TareasDb;user id=sa;Password=1234"
-builder.Services.AddSqlServer<TareasContext>("Data Source=NB0288\\SWIFT;Initial Catalog=TareasDb;user id=prueba;Password=1234;TrustServerCertificate=True");
+builder.Services.AddSqlServer<TareasContext>(builder.Configuration.GetConnectionString("cnTareas"));
+//builder.Services.AddSqlServer<TareasContext>("Data Source=NB0288\\SWIFT;Initial Catalog=TareasDb;user id=prueba;Password=1234;TrustServerCertificate=True");
 
 var app = builder.Build();
         app.MapGet("/", () => "Hello World");
