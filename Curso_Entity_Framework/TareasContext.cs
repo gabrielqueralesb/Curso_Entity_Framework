@@ -8,5 +8,9 @@ namespace Curso_Entity_Framework
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Tarea> Tareas { get; set; }
         public TareasContext(DbContextOptions<TareasContext> options) : base(options) { }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+        }
     }
 }
